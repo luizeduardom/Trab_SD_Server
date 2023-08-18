@@ -3,16 +3,24 @@ package meuservidorudp;
 import java.net.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class MeuServidorUDP {
 
     private static BaseDeDados bd = null;
+    private static String retorno = "";
+    private static ArrayList<String> retornoLista;
+    private static int flag = 0;
 
     public static void main(String[] args) {
         bd = new BaseDeDados();
         bd.criarMatriz();
+        bd.listaCliente.get(0).getFilmesAvaliados().get(0).setAvaliacao(1);
+        bd.listaCliente.get(0).getFilmesAvaliados().get(1).setAvaliacao(3);
+        bd.listaCliente.get(0).getFilmesAvaliados().get(3).setAvaliacao(2);
+        bd.listaCliente.get(0).getFilmesAvaliados().get(6).setAvaliacao(1);
         DatagramSocket aSocket = null;
+        String[] mensagem;
 
         try {
             aSocket = new DatagramSocket(6789);
@@ -28,22 +36,32 @@ public class MeuServidorUDP {
 
                 String receivedString = new String(receivedData, 0, receivedLenght, StandardCharsets.UTF_8);
 
-
-                String retorno = "";
                 System.out.println(receivedString);
-                String[] mensagem = receivedString.split(".");
+                mensagem = receivedString.split(";");
                 System.out.println(mensagem[0]);
                 System.out.println(mensagem[1]);
                 switch (mensagem[1]) {
-                    case "mostrar":
-                        retorno = bd.listar(mensagem[0]);
+                    case "listar":
+                        retornoLista = bd.listar(mensagem[0]);
+                        flag = 1;
                         break;
                     case "validar":
                         retorno = bd.validar(mensagem[0]);
+                        break;
 
                 }
 
-                byte[] todasMsg = retorno.getBytes();
+                System.out.println("retornei: " + retorno);
+                byte[] todasMsg;
+                if (flag == 1) {
+                    String responseString = String.join(",", retornoLista);
+                    System.out.println(responseString);
+                    todasMsg = responseString.getBytes();
+                    flag = 0;
+
+                } else {
+                    todasMsg = retorno.getBytes();
+                }
 
                 DatagramPacket reply = new DatagramPacket(todasMsg, todasMsg.length, request.getAddress(), request.getPort());
 
