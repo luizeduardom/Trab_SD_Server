@@ -19,45 +19,6 @@ public class BaseDeDados {
         return listaFilmes;
     }
 
-    public ArrayList<String> listar(String id) {
-        int aux = Integer.parseInt(id);
-        ArrayList<String> retornoFilmes = new ArrayList();
-        boolean validacao = true;
-        
-        for (int i = 0; i < listaFilmes.size(); i++) {
-            if (listaCliente.get(aux).getFilmesAvaliados().get(i).getAvaliacao() != 0 ) {
-                 retornoFilmes.add(listaCliente.get(aux).getFilmesAvaliados().get(i).getTitulo());
-                 retornoFilmes.add(String.valueOf(listaCliente.get(aux).getFilmesAvaliados().get(i).getAvaliacao()));
-                 validacao = false;
-            }
-        }
-        if (validacao){
-            retornoFilmes.add("-1");
-        }
-        return retornoFilmes;
-    }
-
-    public String validar(String nome) {
-        System.out.println(nome);
-        System.out.println(listaCliente.size());
-        for (int i = 0; i < listaCliente.size(); i++) {
-            if (listaCliente.get(i).getNome().equals(nome)) {
-                System.out.println("nome");
-                listaCliente.get(i).setId(i);
-                return "1";
-            }
-        }
-        return "-1";
-    }
-
-    public int adquirirId(String nome) {
-        for (Cliente c : listaCliente) {
-            if (c.getNome().equals(nome)) {
-                return c.getId();
-            }
-        }
-        return -1;
-    }
 
     public BaseDeDados() {
         lista = new ArrayList();
@@ -120,30 +81,37 @@ public class BaseDeDados {
         listaCliente.add(a);
         listaCliente.get(0).setNome("ASDRUBAL");
         listaCliente.get(0).setFilmesAvaliados(listaFilmes);
+        listaCliente.get(0).setId(0);
 
         listaCliente.add(b);
         listaCliente.get(1).setNome("BRUNO");
         listaCliente.get(1).setFilmesAvaliados(listaFilmes);
-
+        listaCliente.get(1).setId(1);
+        
         listaCliente.add(c);
         listaCliente.get(2).setNome("CADU");
         listaCliente.get(2).setFilmesAvaliados(listaFilmes);
+        listaCliente.get(2).setId(2);
 
         listaCliente.add(d);
         listaCliente.get(3).setNome("BRENO");
         listaCliente.get(3).setFilmesAvaliados(listaFilmes);
+        listaCliente.get(3).setId(3);
 
         listaCliente.add(e);
         listaCliente.get(4).setNome("FILIPE");
         listaCliente.get(4).setFilmesAvaliados(listaFilmes);
+        listaCliente.get(4).setId(4);
 
         listaCliente.add(f);
         listaCliente.get(5).setNome("FERNANDA");
         listaCliente.get(5).setFilmesAvaliados(listaFilmes);
+        listaCliente.get(5).setId(5);
 
         listaCliente.add(g);
         listaCliente.get(6).setNome("JULIO");
         listaCliente.get(6).setFilmesAvaliados(listaFilmes);
+        listaCliente.get(6).setId(6);
 
         listaCliente.add(h);
         listaCliente.get(7).setNome("PEDRO");
@@ -156,7 +124,6 @@ public class BaseDeDados {
         listaCliente.add(j);
         listaCliente.get(9).setNome("FILOMENA");
         listaCliente.get(9).setFilmesAvaliados(listaFilmes);
-        
 
         System.out.println(listaCliente);
     }

@@ -17,12 +17,6 @@ public class Cliente {
         this.id = id;
     }
     
-    
-
-    public Cliente(String nome) {
-        this.nome = nome;
-        this.filmesAvaliados = new ArrayList();
-    }
 
     public Cliente() {
         this.filmesAvaliados = new ArrayList();
@@ -47,7 +41,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" + "nome=" + nome + ", filmesAvaliados=" + filmesAvaliados + '}' + "\n";
+        return "Cliente{" + "nome=" + nome + ", filmesAvaliados=" + filmesAvaliados +'}' + "\n";
     }
     
     
