@@ -10,6 +10,7 @@ public class BaseDeDados {
     private ArrayList lista = null;
     List<Cliente> listaCliente = new ArrayList();
     List<Filme> listaFilmes = new ArrayList();
+    private int idClienteAtual;
 
     public List<Cliente> getListaCliente() {
         return listaCliente;
@@ -19,6 +20,32 @@ public class BaseDeDados {
         return listaFilmes;
     }
 
+    public String validarNome(String nome) {
+        for (int i = 0; i < listaCliente.size(); i++) {
+            if (listaCliente.get(i).getNome().equals(nome)) {
+                idClienteAtual = i;
+                return "1";
+            }
+        }
+        return "-1";
+
+    }
+    
+    public String pegarId (){
+        return String.valueOf(idClienteAtual);
+    }
+    
+    public ArrayList<String> listar (String id){
+        int idConvertido = Integer.parseInt(id.trim());
+        ArrayList<String> filmesAvaliados = new ArrayList();
+        for (int i = 0; i<listaCliente.size(); i++){
+            if (listaCliente.get(idConvertido).getFilmesAvaliados().get(i).getAvaliacao() != 0){
+                filmesAvaliados.add(listaCliente.get(idConvertido).getFilmesAvaliados().get(i).getTitulo());
+                filmesAvaliados.add(String.valueOf(listaCliente.get(idConvertido).getFilmesAvaliados().get(i).getAvaliacao()));
+            }
+        }
+        return filmesAvaliados;
+    }
 
     public BaseDeDados() {
         lista = new ArrayList();
@@ -86,8 +113,9 @@ public class BaseDeDados {
         listaCliente.add(b);
         listaCliente.get(1).setNome("BRUNO");
         listaCliente.get(1).setFilmesAvaliados(listaFilmes);
+        listaCliente.get(1).getFilmesAvaliados().get(0).setAvaliacao(1);
         listaCliente.get(1).setId(1);
-        
+
         listaCliente.add(c);
         listaCliente.get(2).setNome("CADU");
         listaCliente.get(2).setFilmesAvaliados(listaFilmes);
