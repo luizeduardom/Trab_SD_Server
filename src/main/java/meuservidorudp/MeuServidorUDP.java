@@ -63,6 +63,10 @@ public class MeuServidorUDP {
                         System.out.println(retornoListagem.toString());
                         flag = 1;
                         break;
+                    case "recomendar":
+                        retorno = bd.recomendar(respostaConvertida[0]);
+                        System.out.println(retorno);
+                        break;
                 }
                 if (flag == 1) {
                     if (!retornoListagem.isEmpty()) {
@@ -76,6 +80,7 @@ public class MeuServidorUDP {
                     } else {
                         retorno = "-1";
                         System.out.println(retorno);
+                        flag = 0;
                         todasMsg = retorno.getBytes();
                     }
                 } else {

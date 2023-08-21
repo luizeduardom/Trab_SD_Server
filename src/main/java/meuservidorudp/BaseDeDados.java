@@ -16,6 +16,61 @@ public class BaseDeDados {
         return listaCliente;
     }
 
+    public int buscarClienteParecido(int idConvertido) {
+        int tamanho = listaCliente.get(0).getFilmes().size();
+        double valorTotal = 0;
+        double menorValor = 9999;
+        int idCliente = 0;
+        int j = 0;
+        for (int i = 0; i < listaCliente.size(); i++) {
+            valorTotal = 0;
+            if (i != idConvertido) {
+                for (j = 0; j < tamanho; j++) {
+                    int primeiroIndice = listaCliente.get(idConvertido).getFilmes().get(j).getAvaliacao();
+                    int segundoIndice = listaCliente.get(i).getFilmes().get(j).getAvaliacao();
+                    double valorParcial = primeiroIndice - segundoIndice;
+                    valorTotal += Math.pow(valorParcial, 2);
+                }
+                
+                System.out.println("O menor valor é: " + menorValor);
+                if (valorTotal <= menorValor && valorTotal != 0) {
+                    idCliente = i;
+                    menorValor = valorTotal;
+                }
+            }
+
+        }
+
+        if (menorValor == 9999) {
+            return -1;
+        } else {
+            System.out.println("To printando no id: " + idCliente);
+            return idCliente;
+
+        }
+
+    }
+
+    public String recomendar(String id) {
+        int idConvertido = Integer.parseInt(id.trim());
+        int idClienteParecido;
+        idClienteParecido = buscarClienteParecido(idConvertido);
+        System.out.println("O cliente parecido é do id: " + idClienteParecido);
+                
+        int tamanho = listaCliente.get(0).getFilmes().size();
+        if (idClienteParecido == -1) {
+            return "-1";
+        } else {
+            for (int i = 0; i < tamanho; i++) {
+                if (listaCliente.get(idConvertido).getFilmes().get(i).getAvaliacao() == 0 && listaCliente.get(idClienteParecido).getFilmes().get(i).getAvaliacao() != 0
+                        && listaCliente.get(idClienteParecido).getFilmes().get(i).getAvaliacao() != 1) {
+                    return listaCliente.get(idClienteParecido).getFilmes().get(i).getTitulo();
+                }
+            }
+            return "-1";
+        }
+    }
+
     public String validarNome(String nome) {
         for (int i = 0; i < listaCliente.size(); i++) {
             if (listaCliente.get(i).getNome().equals(nome)) {
@@ -26,13 +81,13 @@ public class BaseDeDados {
         return "-1";
 
     }
-    
-    public String avaliar(String indiceFilme, String avaliacao){
+
+    public String avaliar(String indiceFilme, String avaliacao) {
         int indiceConvertido = Integer.parseInt(indiceFilme);
         int avaliacaoConvertida = Integer.parseInt(avaliacao);
-        
+
         listaCliente.get(idClienteAtual).getFilmes().get(indiceConvertido).setAvaliacao(avaliacaoConvertida);
-        
+
         return "1";
     }
 
@@ -79,20 +134,7 @@ public class BaseDeDados {
         listaCliente.add(h);
         listaCliente.add(i);
         listaCliente.add(j);
-        
+
     }
 
-    public void insere(String message) {
-        lista.add(message.trim());
-    }
-
-    public String le() {
-        String s = "\n";
-        int fim = lista.size();
-
-        for (int pos = 0; pos < fim; pos++) {
-            s = s + "[" + (pos + 1) + "]" + (String) lista.get(pos) + "\n";
-        }
-        return s;
-    }
 }
