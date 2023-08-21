@@ -9,15 +9,11 @@ public class BaseDeDados {
 
     private ArrayList lista = null;
     List<Cliente> listaCliente = new ArrayList();
-    List<Filme> listaFilmes = new ArrayList();
+
     private int idClienteAtual;
 
     public List<Cliente> getListaCliente() {
         return listaCliente;
-    }
-
-    public List<Filme> getListaFilmes() {
-        return listaFilmes;
     }
 
     public String validarNome(String nome) {
@@ -31,17 +27,26 @@ public class BaseDeDados {
 
     }
     
-    public String pegarId (){
+    public String avaliar(String indiceFilme, String avaliacao){
+        int indiceConvertido = Integer.parseInt(indiceFilme);
+        int avaliacaoConvertida = Integer.parseInt(avaliacao);
+        
+        listaCliente.get(idClienteAtual).getFilmes().get(indiceConvertido).setAvaliacao(avaliacaoConvertida);
+        
+        return "1";
+    }
+
+    public String pegarId() {
         return String.valueOf(idClienteAtual);
     }
-    
-    public ArrayList<String> listar (String id){
+
+    public ArrayList<String> listar(String id) {
         int idConvertido = Integer.parseInt(id.trim());
         ArrayList<String> filmesAvaliados = new ArrayList();
-        for (int i = 0; i<listaCliente.size(); i++){
-            if (listaCliente.get(idConvertido).getFilmesAvaliados().get(i).getAvaliacao() != 0){
-                filmesAvaliados.add(listaCliente.get(idConvertido).getFilmesAvaliados().get(i).getTitulo());
-                filmesAvaliados.add(String.valueOf(listaCliente.get(idConvertido).getFilmesAvaliados().get(i).getAvaliacao()));
+        for (int i = 0; i < listaCliente.size(); i++) {
+            if (listaCliente.get(idConvertido).getFilmes().get(i).getAvaliacao() != 0) {
+                filmesAvaliados.add(listaCliente.get(idConvertido).getFilmes().get(i).getTitulo());
+                filmesAvaliados.add(String.valueOf(listaCliente.get(idConvertido).getFilmes().get(i).getAvaliacao()));
             }
         }
         return filmesAvaliados;
@@ -52,108 +57,29 @@ public class BaseDeDados {
     }
 
     public void criarMatriz() {
-        Filme filme0 = new Filme("Cronicas de Narnia");
-        Filme filme1 = new Filme("Bambi");
-        Filme filme2 = new Filme("Ursinho Pool");
-        Filme filme3 = new Filme("Barbie");
-        Filme filme4 = new Filme("Stuart Liro");
-        Filme filme5 = new Filme("Liro stiti");
-        Filme filme6 = new Filme("Mickey mousse");
-        Filme filme7 = new Filme("Pequeno sereio");
-        Filme filme8 = new Filme("Nata goiaba");
-        Filme filme9 = new Filme("Floquis");
-        Filme filme10 = new Filme("Pluto");
-        Filme filme11 = new Filme("Pateta");
-        Filme filme12 = new Filme("Scooby doo");
-        Filme filme13 = new Filme("Monstros SA");
-        Filme filme14 = new Filme("Kick buttowisk");
-        Filme filme15 = new Filme("Atirador");
-        Filme filme16 = new Filme("Justiceiro");
-        Filme filme17 = new Filme("Flash");
-        Filme filme18 = new Filme("Homem de ferro");
-        Filme filme19 = new Filme("Planeta dos macacos");
 
-        listaFilmes.add(filme0);
-        listaFilmes.add(filme1);
-        listaFilmes.add(filme2);
-        listaFilmes.add(filme3);
-        listaFilmes.add(filme4);
-        listaFilmes.add(filme5);
-        listaFilmes.add(filme6);
-        listaFilmes.add(filme7);
-        listaFilmes.add(filme8);
-        listaFilmes.add(filme9);
-        listaFilmes.add(filme10);
-        listaFilmes.add(filme11);
-        listaFilmes.add(filme12);
-        listaFilmes.add(filme13);
-        listaFilmes.add(filme14);
-        listaFilmes.add(filme15);
-        listaFilmes.add(filme16);
-        listaFilmes.add(filme17);
-        listaFilmes.add(filme18);
-        listaFilmes.add(filme19);
-
-        Cliente a = new Cliente();
-        Cliente b = new Cliente();
-        Cliente c = new Cliente();
-        Cliente d = new Cliente();
-        Cliente e = new Cliente();
-        Cliente f = new Cliente();
-        Cliente g = new Cliente();
-        Cliente h = new Cliente();
-        Cliente i = new Cliente();
-        Cliente j = new Cliente();
+        Cliente a = new Cliente("ASDRUBAL", 0);
+        Cliente b = new Cliente("BRUNO", 1);
+        Cliente c = new Cliente("CADU", 2);
+        Cliente d = new Cliente("BRENO", 3);
+        Cliente e = new Cliente("FILIPE", 4);
+        Cliente f = new Cliente("FERNANDA", 5);
+        Cliente g = new Cliente("JULIO", 6);
+        Cliente h = new Cliente("PEDRO", 7);
+        Cliente i = new Cliente("GEOVANA", 8);
+        Cliente j = new Cliente("FILOMENA", 9);
 
         listaCliente.add(a);
-        listaCliente.get(0).setNome("ASDRUBAL");
-        listaCliente.get(0).setFilmesAvaliados(listaFilmes);
-        listaCliente.get(0).setId(0);
-
         listaCliente.add(b);
-        listaCliente.get(1).setNome("BRUNO");
-        listaCliente.get(1).setFilmesAvaliados(listaFilmes);
-        listaCliente.get(1).getFilmesAvaliados().get(0).setAvaliacao(1);
-        listaCliente.get(1).setId(1);
-
         listaCliente.add(c);
-        listaCliente.get(2).setNome("CADU");
-        listaCliente.get(2).setFilmesAvaliados(listaFilmes);
-        listaCliente.get(2).setId(2);
-
         listaCliente.add(d);
-        listaCliente.get(3).setNome("BRENO");
-        listaCliente.get(3).setFilmesAvaliados(listaFilmes);
-        listaCliente.get(3).setId(3);
-
         listaCliente.add(e);
-        listaCliente.get(4).setNome("FILIPE");
-        listaCliente.get(4).setFilmesAvaliados(listaFilmes);
-        listaCliente.get(4).setId(4);
-
         listaCliente.add(f);
-        listaCliente.get(5).setNome("FERNANDA");
-        listaCliente.get(5).setFilmesAvaliados(listaFilmes);
-        listaCliente.get(5).setId(5);
-
         listaCliente.add(g);
-        listaCliente.get(6).setNome("JULIO");
-        listaCliente.get(6).setFilmesAvaliados(listaFilmes);
-        listaCliente.get(6).setId(6);
-
         listaCliente.add(h);
-        listaCliente.get(7).setNome("PEDRO");
-        listaCliente.get(7).setFilmesAvaliados(listaFilmes);
-
         listaCliente.add(i);
-        listaCliente.get(8).setNome("GEOVANA");
-        listaCliente.get(8).setFilmesAvaliados(listaFilmes);
-
         listaCliente.add(j);
-        listaCliente.get(9).setNome("FILOMENA");
-        listaCliente.get(9).setFilmesAvaliados(listaFilmes);
-
-        System.out.println(listaCliente);
+        
     }
 
     public void insere(String message) {
@@ -167,13 +93,6 @@ public class BaseDeDados {
         for (int pos = 0; pos < fim; pos++) {
             s = s + "[" + (pos + 1) + "]" + (String) lista.get(pos) + "\n";
         }
-
         return s;
     }
-
-    @Override
-    public String toString() {
-        return "BaseDeDados{" + "listaCliente=" + listaCliente + ", listaFilmes=" + listaFilmes + '}';
-    }
-
 }

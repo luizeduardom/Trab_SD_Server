@@ -1,7 +1,7 @@
-
 package dominio;
 
 public class Filme {
+
     private String titulo;
     private int avaliacao;
 
@@ -30,6 +30,5 @@ public class Filme {
     public String toString() {
         return titulo;
     }
-        
-    
+
 }
